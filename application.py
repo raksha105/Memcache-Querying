@@ -24,7 +24,7 @@ def hello_word():
 		
 		return """ 
 		
-		<p> LAST NAME: JAYARAM, ID :3971, BATCH : 3.30
+		
 		
 		<form id ="upload_file" enctype="multipart/form-data" method="post" action="/upload_file">
 
@@ -89,10 +89,10 @@ def upload_db():
 		sql = "LOAD DATA LOCAL INFILE '"+filename+"' INTO TABLE "+table+" FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES SET my_number=CEIL(RAND() *6) "
 		print filename
 		print table
-		db = MySQLdb.connect(host="rakshadb.cdy91id5bbuk.us-west-2.rds.amazonaws.com",   
-						user="raksha105",        
-						passwd="myrakshadb",
-						db="rakshadb")
+		db = MySQLdb.connect(host="yourhostname.com",   
+						user="user",        
+						passwd="passwd",
+						db="yourdb")
 						
 		
 		#print "create table "+table+"(Country varchar(255),station varchar(255),vmo_number int, unit varchar(255), jan float, feb float, mar float, apr float, may, float, jun float, jul float, aug float, sep float, oct float, nov float, dec float,ID int NOT NULL AUTO_INCREMENT,"+str1+",PRIMARY KEY (ID))"			
@@ -132,10 +132,10 @@ def upload_db():
 def query_normal():
 
 		connect_time = datetime.datetime.now()
-		db = MySQLdb.connect(host="rakshadb.cdy91id5bbuk.us-west-2.rds.amazonaws.com",   
-						user="raksha105",        
-						passwd="myrakshadb",
-						db="rakshadb")
+		db = MySQLdb.connect(host="yourhostname.com",   
+						user="user",        
+						passwd="passwd",
+						db="yourdb")
 		conn_done = datetime.datetime.now() - connect_time 
 		
 		tab_name = request.form.getlist('norm_table')
@@ -193,68 +193,18 @@ def quest_7():
 		text_2 = request.form['u_j']
 		print tx
 		print text_2
-		# str_txt = str(tx)
-		# arr_txt = str_txt.split(" ")
-		# print type(arr_txt)
-		# print arr_txt[2]
-		
-		# db = MySQLdb.connect(host="rakshadb.cdy91id5bbuk.us-west-2.rds.amazonaws.com",   
-						# user="raksha105",        
-						# passwd="myrakshadb",
-						# db="rakshadb")
-		# if(arr_txt[1] == 'E'):
-			# month = 'jan'
-		
-		# if(arr_txt[1] == 'F'):
-			# month = 'feb'
-			
-		# if(arr_txt[1] == 'G'):
-			# month = 'mar'
-			
-		# if(arr_txt[1] == 'H'):
-			# month = 'jun'
-			
-		# if(arr_txt[1] == 'H'):
-			# month = 'jul'
-			
-		# if(arr_txt[1] == 'I'):
-			# month = 'aug'
-			
-		# if(arr_txt[1] == 'J'):
-			# month = 'sep'
-			
-		# if(arr_txt[1] == 'H'):
-			# month = 'oct'
-		
-		# if(arr_txt[1] == 'I'):
-			# month = 'nov'
-			
-		# if(arr_txt[1] == 'J'):
-			# month = 'dec'
-		
-		# country = arr_txt[0]
-		# symn = arr_txt[2]
-		# val = arr_txt[3]
-		
-		# cur = db.cursor()				
-		# start_time = datetime.datetime.now()
-		# for i in range(1,200):
-				# cur.execute("select * from UNPrecip where Country= '"+str(country)+"' and "+str(month)+" "+str(symn)+" "+str(val))
-				# for row in cur.fetchall():
-						# print row
-				
 
-		return "ascascasaas"
+		return "success"
 		
 
 
 @app.route('/user_input', methods=['POST'])
 def user_input():
 
-		db = MySQLdb.connect(host="rakshadb.cdy91id5bbuk.us-west-2.rds.amazonaws.com",   
-						user="raksha105",        
-						passwd="myrakshadb",
-						db="rakshadb")
+		db = MySQLdb.connect(host="yourhostname",   
+						user="user",        
+						passwd="yourdb",
+						db="passwd")
 
 		query_string = request.form['user_text']
 		val = query_string.split()
@@ -287,17 +237,13 @@ def memecache():
 		
 		
 		
-		db = MySQLdb.connect(host="rakshadb.cdy91id5bbuk.us-west-2.rds.amazonaws.com",   
-						user="raksha105",        
-						passwd="myrakshadb",
-						db="rakshadb")
+		db = MySQLdb.connect(host="yourhostname.com",   
+						user="user",        
+						passwd="passwd",
+						db="yourdb")
 		
-		
-		
-		
-		
-		
-		mc = memcache.Client(['rakshacache.m2whgn.cfg.usw2.cache.amazonaws.com'], debug = 0)
+	
+		mc = memcache.Client(['yourhostname'], debug = 0)
 		#mc.flush_all()
 		
 		#print str_query
@@ -335,7 +281,7 @@ def memecache():
 @app.route('/c_content', methods=['POST'])
 def c_content():
 
-		mc = memcache.Client(['rakshacache.m2whgn.cfg.usw2.cache.amazonaws.com'], debug = 0)
+		mc = memcache.Client(['yourhostname.com'], debug = 0)
 		string_query = request.form['view_cache_contents']
 		ss = hashlib.md5(string_query).hexdigest()
 		print string_query
@@ -353,7 +299,7 @@ def c_content():
 @app.route('/flush_cache', methods=['POST'])
 def flush_cache():
 		
-		mc = memcache.Client(['rakshacache.m2whgn.cfg.usw2.cache.amazonaws.com'], debug = 0)
+		mc = memcache.Client(['yourhostname.com'], debug = 0)
 
 		mc.flush_all()
 		return "flushed cache "
@@ -362,10 +308,10 @@ def flush_cache():
 		
 @app.route('/query_tuples', methods=['POST'])
 def query_tuples():
-		db = MySQLdb.connect(host="rakshadb.cdy91id5bbuk.us-west-2.rds.amazonaws.com",   
-						user="raksha105",        
-						passwd="myrakshadb",
-						db="rakshadb")
+		db = MySQLdb.connect(host="yourhostname.com",   
+						user="user",        
+						passwd="passwd",
+						db="yourdb")
 		
 		
 		table_name = request.form['table_query']
@@ -401,8 +347,8 @@ def upload_file():
 		
 
 		
-		s3 = boto.connect_s3("AKIAICDVW6GK66SSXSHA","nCMhf2hcPH/OZq4FcqrNgaYDvowQPOfA2l0jRk/s")
-		bucket = s3.create_bucket('orangeraksha') 
+		s3 = boto.connect_s3("yourkey","your key")
+		bucket = s3.create_bucket('bucketname') 
 		start_time =time.time()
 		key = bucket.new_key('allfiles/'+filename)
 		key.set_contents_from_filename(filename)
